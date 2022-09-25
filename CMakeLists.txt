@@ -3,4 +3,4 @@ project(IntegersModulo)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(IntegersModulo main.cpp IntMod.cpp IntMod.h)
+add_executable(IntegersModulo main.cpp IntMod.cpp IntMod.h Polynomial.cpp Polynomial.h)
