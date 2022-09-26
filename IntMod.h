@@ -4,6 +4,7 @@
 
 using namespace std;
 #include <iostream>
+#include <string>
 
 #ifndef INTEGERSMODULO_INTMOD_H
 #define INTEGERSMODULO_INTMOD_H
@@ -18,6 +19,7 @@ public:
     IntMod(int mod, int val);
     void SetVal(int val);
     int GetVal() const;
+    int GetMod() const;
     static IntMod add(IntMod a, IntMod b);
     static IntMod add(IntMod a, int b);
     static IntMod add(int a, IntMod b);
@@ -28,7 +30,7 @@ public:
     static IntMod mult(int a, IntMod b);
     static IntMod mult(IntMod a, int b);
     friend std::ostream& operator<<(std::ostream& out, IntMod a);
-    friend std::istream& operator>>(std::istream& out, IntMod a);
+    friend std::istream& operator>>(std::istream& in, IntMod a);
     friend IntMod operator+(IntMod a, IntMod b);
     friend IntMod operator+(int a, IntMod b);
     friend IntMod operator+(IntMod a, int b);
@@ -40,6 +42,10 @@ public:
     friend IntMod operator*(IntMod a, int b);
     friend bool operator==(IntMod a, IntMod b);
     friend bool operator!=(IntMod a, IntMod b);
+    friend bool operator==(IntMod a, int b);
+    friend bool operator!=(IntMod a, int b);
+    friend bool operator==(int a, IntMod b);
+    friend bool operator!=(int a, IntMod b);
     IntMod& operator=(IntMod b);
     IntMod& operator=(int b);
     IntMod operator+=(IntMod b);
@@ -54,9 +60,9 @@ public:
     IntMod operator--(int);
     IntMod operator+();
     IntMod operator-();
-
-    //TODO: nie jebać się z operatorami YET, na razie porobić funkcje dla INTMOD i intów, a potem pododawać overloading
+    operator string() const;
 };
+
 
 
 #endif //INTEGERSMODULO_INTMOD_H

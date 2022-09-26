@@ -74,7 +74,7 @@ std::ostream& operator<<(std::ostream& out, const IntMod a){
     return out<<a.GetVal();
 }
 
-std::istream& operator>>(std::istream& in, IntMod a){
+std::istream& operator>>(istream& in, IntMod a) {
     int buff;
     in >> buff;
     a.SetVal(buff);
@@ -118,8 +118,9 @@ IntMod operator*(const int a, const IntMod b){
 }
 
 IntMod& IntMod::operator=(const IntMod b) {
-    if (_mod != b._mod){
-        throw b._mod * _mod;
+    if (_mod == 0) _mod = b.GetMod();
+    if (_mod != b.GetMod() and _mod != 0){
+        throw b.GetMod() * _mod;
     }
     (*this).SetVal(b.GetVal());
     return *this;
@@ -183,7 +184,7 @@ IntMod IntMod::operator--(int) {
 }
 
 bool operator==(const IntMod a, const IntMod b) {
-    return (a._val == b._val) && (a._mod == b._mod);
+    return (a.GetVal() == b.GetVal()) && (a.GetMod() == b.GetMod());
 }
 
 bool operator!=(const IntMod a, const IntMod b) {
@@ -196,5 +197,29 @@ IntMod IntMod::operator+() {
 
 IntMod IntMod::operator-() {
     return IntMod((*this)._mod,-(*this)._val);
+}
+
+int IntMod::GetMod() const {
+    return _mod;
+}
+
+IntMod::operator string() const {
+    return std::to_string(_val);
+}
+
+bool operator==(IntMod a, int b) {
+    return a == IntMod(a.GetMod(), b);
+}
+
+bool operator!=(IntMod a, int b) {
+    return !(a==b);
+}
+
+bool operator==(int a, IntMod b) {
+    return b==a;
+}
+
+bool operator!=(int a, IntMod b) {
+    return b!=a;
 }
 
